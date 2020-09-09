@@ -8,13 +8,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import later.com.linkinbio.api.ApiService
+import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.model.LinksResponse
 
 class PhotosViewModel : ViewModel() {
 
-    private val linksList by lazy { MutableLiveData<List<LinksResponse>>() }
+    private val linksList by lazy { MutableLiveData<List<LinkinbioPost>>() }
 
-    val linksLiveData : LiveData<List<LinksResponse>>
+    val linksLiveData : LiveData<List<LinkinbioPost>>
         get() = linksList
 
 
@@ -27,21 +28,21 @@ class PhotosViewModel : ViewModel() {
         ApiService.create()
     }
 
-    var disposable: CompositeDisposable? = null
+    var disposable: CompositeDisposable = CompositeDisposable()
 
     fun fetchLinks() {
-        disposable?.add(apiService.getLinks()
+        disposable.add(apiService.getLinks("32192")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({showResult(it)
-
+                .subscribe({
+                    showResult(it)
                 },{
                     showError()
                 }))
     }
 
-    private fun showResult(linksListResponse: List<LinksResponse>){
-        linksList.value= linksListResponse
+    private fun showResult(linksListResponse: LinksResponse){
+        linksList.value= linksListResponse.linkinbio_posts
         isError.value = false
     }
 

@@ -6,13 +6,14 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface ApiService {
     
     
-    @GET()
-    fun getLinks() : Observable<List<LinksResponse>>
+    @GET("linkinbio_posts")
+    fun getLinks(@Query("instagram_profile_id") instaProfileId : String) : Observable<LinksResponse>
 
     companion object {
         fun create() : ApiService {
@@ -20,7 +21,7 @@ interface ApiService {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://api-prod.linkin.bio/api/pub/linkinbio_posts?instagram_profile_id=32192")
+                    .baseUrl("https://api-prod.linkin.bio/api/pub/")
                     .build()
 
             return retrofit.create(ApiService::class.java)
