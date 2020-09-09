@@ -5,15 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentTransaction
+import later.com.linkinbio.R;
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.manager.SupportRequestManagerFragment
 import later.com.linkinbio.databinding.FragmentPhotosBinding
+import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.ui.adapter.PhotosAdapter
+import later.com.linkinbio.ui.onItemClickListener
 import later.com.linkinbio.ui.viewmodel.PhotosViewModel
 
-class PhotosFragment : Fragment() {
+class PhotosFragment : Fragment(), onItemClickListener {
 
 
     private var _binding: FragmentPhotosBinding? = null
@@ -61,6 +65,10 @@ class PhotosFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(post: LinkinbioPost) {
+
     }
 
 }

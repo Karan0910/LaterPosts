@@ -1,5 +1,6 @@
 package later.com.linkinbio.ui.viewmodel
 
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,9 +8,11 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import later.com.linkinbio.R
 import later.com.linkinbio.api.ApiService
 import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.model.LinksResponse
+import later.com.linkinbio.ui.onItemClickListener
 
 class PhotosViewModel : ViewModel() {
 
@@ -51,9 +54,8 @@ class PhotosViewModel : ViewModel() {
     }
 
     override fun onCleared() {
-        disposable?.dispose()
-        disposable?.clear()
+        disposable.dispose()
+        disposable.clear()
         super.onCleared()
     }
-
 }
