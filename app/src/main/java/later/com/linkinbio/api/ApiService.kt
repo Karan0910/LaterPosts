@@ -12,7 +12,7 @@ interface ApiService {
     
     
     @GET()
-    fun getLinks() : Observable<LinksResponse>
+    fun getLinks() : Observable<List<LinksResponse>>
 
     companion object {
         fun create() : ApiService {
