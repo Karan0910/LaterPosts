@@ -1,21 +1,21 @@
 package later.com.linkinbio.ui.fragment
 
+import later.com.linkinbio.R
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
-import later.com.linkinbio.R;
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.manager.SupportRequestManagerFragment
 import later.com.linkinbio.databinding.FragmentPhotosBinding
 import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.ui.adapter.PhotosAdapter
 import later.com.linkinbio.ui.onItemClickListener
 import later.com.linkinbio.ui.viewmodel.PhotosViewModel
+
 
 class PhotosFragment : Fragment(), onItemClickListener {
 
@@ -44,7 +44,7 @@ class PhotosFragment : Fragment(), onItemClickListener {
 
     private fun init(){
         photosViewModel.fetchLinks()
-        photosAdapter = PhotosAdapter()
+        photosAdapter = PhotosAdapter(this)
 
         binding.photosRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
@@ -69,6 +69,14 @@ class PhotosFragment : Fragment(), onItemClickListener {
 
     override fun onItemClick(post: LinkinbioPost) {
 
+        val b = Bundle()
+        b.putString("post_url", post.link_url)
+        val transaction = fragmentManager!!.beginTransaction()
+        val fragment: Fragment = PostDetailsFragment()
+        fragment.arguments = b
+        transaction.add(R.id.fragment_view_holder, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }
