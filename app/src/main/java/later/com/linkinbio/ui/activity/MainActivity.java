@@ -1,7 +1,9 @@
-package later.com.linkinbio;
+package later.com.linkinbio.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import later.com.linkinbio.R;
 
 public class MainActivity extends AppCompatActivity {
 
