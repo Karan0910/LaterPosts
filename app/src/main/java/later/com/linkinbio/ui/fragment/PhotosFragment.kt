@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import later.com.linkinbio.databinding.FragmentPhotosBinding
@@ -71,12 +72,20 @@ class PhotosFragment : Fragment(), onItemClickListener {
 
         val b = Bundle()
         b.putString("post_url", post.link_url)
-        val transaction = fragmentManager!!.beginTransaction()
         val fragment: Fragment = PostDetailsFragment()
         fragment.arguments = b
-        transaction.add(R.id.fragment_view_holder, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        try {
+
+            parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                    .add(R.id.fragment_view_holder, fragment)
+                    .addToBackStack(null)
+                    .commit()
+        }  catch (e :Exception) {
+            e.printStackTrace()
+        }
+
+
     }
 
 }

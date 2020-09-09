@@ -6,14 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.webkit.WebViewClient
-import later.com.linkinbio.R
-import later.com.linkinbio.databinding.FragmentPhotosBinding
 import later.com.linkinbio.databinding.FragmentPostDetailsBinding
-import later.com.linkinbio.ui.adapter.PhotosAdapter
-import later.com.linkinbio.ui.viewmodel.PhotosViewModel
-
 
 class PostDetailsFragment : Fragment() {
 
