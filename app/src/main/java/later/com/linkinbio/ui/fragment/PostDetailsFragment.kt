@@ -3,11 +3,11 @@ package later.com.linkinbio.ui.fragment
 import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,9 +32,10 @@ class PostDetailsFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun initView(){
 
-        _binding?.webView?.webViewClient = WebViewClient()
+        _binding?.webView?.webViewClient = webClient()
         _binding?.webView?.loadUrl(arguments?.getString("post_url"))
         val webSettings = _binding?.webView?.settings
+
         if (webSettings != null) {
             webSettings.javaScriptEnabled = true
         }
@@ -45,10 +46,21 @@ class PostDetailsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
+    inner class webClient : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            view.loadUrl(url)
+            return true
+        }
+
+        override fun onPageFinished(view: WebView, url: String) {
+            super.onPageFinished(view, url)
+            _binding?.progressBar?.visibility = View.GONE
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.getItemId() === R.id.home) {
             activity?.supportFragmentManager?.popBackStack()
-            activity?.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
