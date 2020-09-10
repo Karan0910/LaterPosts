@@ -96,6 +96,7 @@ class PostsFragment : Fragment(), onItemClickListener {
         }  catch (e :Exception) {
             e.printStackTrace()
         }
+        photosViewModel.onItemClick(post)
 
 
     }
