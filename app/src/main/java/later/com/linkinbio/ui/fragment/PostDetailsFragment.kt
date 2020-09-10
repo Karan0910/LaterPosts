@@ -3,10 +3,8 @@ package later.com.linkinbio.ui.fragment
 import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +37,15 @@ class PostDetailsFragment : Fragment() {
         if (webSettings != null) {
             webSettings.javaScriptEnabled = true
         }
+        _binding?.webView?.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if (keyCode == KeyEvent.KEYCODE_BACK && _binding?.webView?.canGoBack()!!) {
+                    _binding?.webView?.goBack()
+                    return true
+                }
+                return false
+            }
+        })
 
         (activity as AppCompatActivity).setSupportActionBar(_binding!!.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -59,10 +66,13 @@ class PostDetailsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() === R.id.home) {
+        if (item.getItemId() == R.id.home) {
             activity?.supportFragmentManager?.popBackStack()
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+
 
 }
