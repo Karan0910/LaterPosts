@@ -24,6 +24,17 @@
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="YOU MIGHT ALSO LIKE"
+        android:textColor="@android:color/black"
+        android:padding="15dp"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/photos_recycler_view"
         android:layout_width="match_parent"
