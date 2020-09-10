@@ -32,8 +32,8 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
         holder.itemPhotoBinding.photo = post
         Glide.with(holder.itemPhotoBinding.imageViewPhoto.context)
                 .load(postList[position].imageUrl)
+                .placeholder(R.drawable.ic_baseline_image_24)
                 .centerCrop()
-                //.placeholder(R.drawable.ic_placeholder)
                 .into(holder.itemPhotoBinding.imageViewPhoto)
 
         if (post.isViewed)

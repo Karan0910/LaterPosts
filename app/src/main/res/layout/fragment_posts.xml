@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/explore"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_toolbar"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@android:color/black"
@@ -30,8 +30,8 @@
         android:textStyle="bold"
         android:text="@string/you_might_also_like"
         android:textColor="@android:color/black"
-        android:padding="15dp"
-        android:textSize="14sp"
+        android:padding="@dimen/text_padding"
+        android:textSize="@dimen/text_small"
         android:ellipsize="end"
         android:maxLines="1"/>
 
@@ -39,5 +39,15 @@
         android:id="@+id/photos_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/no_post_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_posts_available"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textSize="@dimen/text_small"/>
 
 </LinearLayout>

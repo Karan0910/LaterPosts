@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -70,7 +69,15 @@ class PostsFragment : Fragment(), onItemClickListener {
         postsViewModel.linksLiveData.observe(viewLifecycleOwner, Observer { linksList ->
             linksList.let {
                 _binding?.photosRecyclerView?.visibility ?:  View.VISIBLE
+                _binding?.noPostText?.visibility ?:  View.INVISIBLE
                 photosAdapter.setUpPhotos(it)
+            }
+        })
+
+        postsViewModel.isErrorLiveData.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                _binding?.photosRecyclerView?.visibility =  View.GONE
+                _binding?.noPostText?.visibility =  View.VISIBLE
             }
         })
     }

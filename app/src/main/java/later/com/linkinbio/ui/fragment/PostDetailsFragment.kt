@@ -3,7 +3,6 @@ package later.com.linkinbio.ui.fragment
 import android.R
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient

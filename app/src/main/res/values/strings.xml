@@ -6,4 +6,6 @@
     <string name="detail">Detail</string>
     <string name="explore">Explore</string>
     <string name="you_might_also_like">YOU MIGHT ALSO LIKE</string>
+    <string name="post_image">Post image</string>
+    <string name="no_posts_available">No Posts Available</string>
 </resources>

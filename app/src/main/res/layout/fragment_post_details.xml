@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/detail"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_toolbar"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@android:color/black"
@@ -34,8 +34,8 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginBottom="-8dp"
-        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="@dimen/progress_margin"
+        android:layout_marginTop="@dimen/progress_margin"
         android:indeterminate="true"/>
 
     <WebView

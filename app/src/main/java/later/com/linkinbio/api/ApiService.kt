@@ -1,6 +1,6 @@
 package later.com.linkinbio.api
 
-import io.reactivex.Observable
+
 import io.reactivex.Single
 import later.com.linkinbio.model.LinksResponse
 import retrofit2.Retrofit
