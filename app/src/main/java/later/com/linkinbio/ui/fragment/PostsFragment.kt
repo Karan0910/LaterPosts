@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -63,7 +64,6 @@ class PostsFragment : Fragment(), onItemClickListener {
             layoutManager = GridLayoutManager(context, 3)
             adapter = photosAdapter
         }
-
     }
 
     private fun observeLiveData(){
@@ -96,9 +96,10 @@ class PostsFragment : Fragment(), onItemClickListener {
         }  catch (e :Exception) {
             e.printStackTrace()
         }
-        photosViewModel.onItemClick(post)
-
+        postsViewModel.onItemClick(post)
 
     }
+
+
 
 }
