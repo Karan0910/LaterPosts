@@ -56,6 +56,7 @@ class PostDetailsFragment : Fragment() {
     inner class webClient : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
             view.loadUrl(url)
+            _binding?.progressBar?.visibility = View.VISIBLE
             return true
         }
 
