@@ -37,9 +37,9 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
                 .into(holder.itemPhotoBinding.imageViewPhoto)
 
         if (post.isViewed)
-            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.colorAccent)
+            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.whiteSmoke)
         else
-            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.cardview_dark_background)
+            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.colorGray)
 
 
         holder.itemPhotoBinding.textDomainUrl.text= post.link_url?.toUri()?.authority ?: ""
