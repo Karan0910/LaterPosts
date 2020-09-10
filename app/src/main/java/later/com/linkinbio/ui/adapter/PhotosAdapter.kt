@@ -36,9 +36,16 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
                 //.placeholder(R.drawable.ic_placeholder)
                 .into(holder.itemPhotoBinding.imageViewPhoto)
 
+        if (post.isViewed)
+            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.colorAccent)
+        else
+            holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.cardview_dark_background)
+
+
         holder.itemPhotoBinding.textDomainUrl.text= post.link_url?.toUri()?.authority ?: ""
 
         holder.itemPhotoBinding.postCardView.setOnClickListener(View.OnClickListener{
+            onItemClickListener.onItemClick(post)
             onItemClickListener.onItemClick(post)
         })
 

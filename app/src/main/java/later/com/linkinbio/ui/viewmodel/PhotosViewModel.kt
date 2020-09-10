@@ -58,4 +58,11 @@ class PhotosViewModel : ViewModel() {
         disposable.clear()
         super.onCleared()
     }
+
+    fun onItemClick(post: LinkinbioPost) {
+        val newLinksList = linksLiveData.value?.toMutableList() ?: return
+        val viewedPost = newLinksList[newLinksList.indexOf(post)]
+        viewedPost.isViewed = true
+        linksList.value = newLinksList
+    }
 }
