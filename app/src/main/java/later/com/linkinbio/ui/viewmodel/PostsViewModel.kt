@@ -58,8 +58,10 @@ class PostsViewModel(private val backgroundScheduler: Scheduler,
 
     fun onItemClick(post: LinkinbioPost) {
         val newLinksList = linksLiveData.value?.toMutableList() ?: return
-        val viewedPost = newLinksList[newLinksList.indexOf(post)]
-        viewedPost.isViewed = true
-        linksList.value = newLinksList
+        if (newLinksList.contains(post)) {
+            val viewedPost = newLinksList[newLinksList.indexOf(post)]
+            viewedPost.isViewed = true
+            linksList.value = newLinksList
+        }
     }
 }

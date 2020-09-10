@@ -31,7 +31,7 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
         val post = postList[position]
         holder.itemPhotoBinding.photo = post
         Glide.with(holder.itemPhotoBinding.imageViewPhoto.context)
-                .load(postList[position].image_url)
+                .load(postList[position].imageUrl)
                 .centerCrop()
                 //.placeholder(R.drawable.ic_placeholder)
                 .into(holder.itemPhotoBinding.imageViewPhoto)
@@ -42,7 +42,7 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
             holder.itemPhotoBinding.textDomainUrl.setBackgroundResource(R.color.colorGray)
 
 
-        holder.itemPhotoBinding.textDomainUrl.text= post.link_url?.toUri()?.authority ?: ""
+        holder.itemPhotoBinding.textDomainUrl.text= post.linkUrl?.toUri()?.authority ?: ""
 
         holder.itemPhotoBinding.postCardView.setOnClickListener(View.OnClickListener{
             onItemClickListener.onItemClick(post)

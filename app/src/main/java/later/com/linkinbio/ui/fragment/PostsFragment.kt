@@ -83,7 +83,7 @@ class PostsFragment : Fragment(), onItemClickListener {
     override fun onItemClick(post: LinkinbioPost) {
 
         val b = Bundle()
-        b.putString("post_url", post.link_url)
+        b.putString("post_url", post.linkUrl)
         val fragment: Fragment = PostDetailsFragment()
         fragment.arguments = b
         try {
