@@ -101,5 +101,4 @@ class PostsFragment : Fragment(), onItemClickListener {
     }
 
 
-
 }

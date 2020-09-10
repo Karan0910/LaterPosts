@@ -46,7 +46,6 @@ class PhotosAdapter(private val onItemClickListener: onItemClickListener) :
 
         holder.itemPhotoBinding.postCardView.setOnClickListener(View.OnClickListener{
             onItemClickListener.onItemClick(post)
-            onItemClickListener.onItemClick(post)
         })
 
         holder.itemPhotoBinding.executePendingBindings()
