@@ -11,31 +11,43 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import later.com.linkinbio.databinding.FragmentPhotosBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import later.com.linkinbio.api.ApiService
+import later.com.linkinbio.databinding.FragmentPostsBinding
 import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.ui.adapter.PhotosAdapter
 import later.com.linkinbio.ui.onItemClickListener
-import later.com.linkinbio.ui.viewmodel.PhotosViewModel
+import later.com.linkinbio.ui.viewmodel.PostsViewModel
 
 
-class PhotosFragment : Fragment(), onItemClickListener {
+class PostsFragment : Fragment(), onItemClickListener {
 
 
-    private var _binding: FragmentPhotosBinding? = null
+    private var _binding: FragmentPostsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var photosViewModel: PhotosViewModel
+    private lateinit var postsViewModel: PostsViewModel
     private lateinit var photosAdapter: PhotosAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        photosViewModel =
-                ViewModelProvider(requireActivity()).get(PhotosViewModel::class.java)
+        postsViewModel =
+                ViewModelProvider(requireActivity(), object : ViewModelProvider.Factory {
+                    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                        @Suppress("UNCHECKED_CAST")
+                        return PostsViewModel(Schedulers.io()
+                                ,AndroidSchedulers.mainThread()
+                                , ApiService.create()) as T
+                    }
+
+                }).get(PostsViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        _binding = FragmentPhotosBinding.inflate(inflater, container, false)
+        _binding = FragmentPostsBinding.inflate(inflater, container, false)
 
         init()
         observeLiveData()
@@ -44,7 +56,7 @@ class PhotosFragment : Fragment(), onItemClickListener {
     }
 
     private fun init(){
-        photosViewModel.fetchLinks()
+        postsViewModel.fetchLinks()
         photosAdapter = PhotosAdapter(this)
 
         binding.photosRecyclerView.apply {
@@ -55,7 +67,7 @@ class PhotosFragment : Fragment(), onItemClickListener {
     }
 
     private fun observeLiveData(){
-        photosViewModel.linksLiveData.observe(viewLifecycleOwner, Observer { linksList ->
+        postsViewModel.linksLiveData.observe(viewLifecycleOwner, Observer { linksList ->
             linksList.let {
                 _binding?.photosRecyclerView?.visibility ?:  View.VISIBLE
                 photosAdapter.setUpPhotos(it)

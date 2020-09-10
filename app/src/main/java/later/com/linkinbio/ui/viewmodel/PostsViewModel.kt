@@ -1,20 +1,20 @@
 package later.com.linkinbio.ui.viewmodel
 
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import later.com.linkinbio.R
 import later.com.linkinbio.api.ApiService
 import later.com.linkinbio.model.LinkinbioPost
 import later.com.linkinbio.model.LinksResponse
-import later.com.linkinbio.ui.onItemClickListener
 
-class PhotosViewModel : ViewModel() {
+class PostsViewModel(private val backgroundScheduler: Scheduler,
+                     private  val mainScheduler: Scheduler,
+                     private  val apiService: ApiService): ViewModel() {
+
 
     private val linksList by lazy { MutableLiveData<List<LinkinbioPost>>() }
 
@@ -27,16 +27,13 @@ class PhotosViewModel : ViewModel() {
     val isErrorLiveData : LiveData<Boolean>
         get() = isError
 
-    val apiService by lazy {
-        ApiService.create()
-    }
 
     var disposable: CompositeDisposable = CompositeDisposable()
 
     fun fetchLinks() {
         disposable.add(apiService.getLinks("32192")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(backgroundScheduler)
+                .observeOn(mainScheduler)
                 .subscribe({
                     showResult(it)
                 },{

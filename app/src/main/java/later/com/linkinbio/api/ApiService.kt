@@ -1,6 +1,7 @@
 package later.com.linkinbio.api
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import later.com.linkinbio.model.LinksResponse
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -13,7 +14,7 @@ interface ApiService {
     
     
     @GET("linkinbio_posts")
-    fun getLinks(@Query("instagram_profile_id") instaProfileId : String) : Observable<LinksResponse>
+    fun getLinks(@Query("instagram_profile_id") instaProfileId : String) : Single<LinksResponse>
 
     companion object {
         fun create() : ApiService {
