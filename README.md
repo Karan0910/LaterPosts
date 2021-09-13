@@ -1,4 +1,4 @@
-# linkinbio-test-android
+# linkinbio
 Linkin.bio is a landing page that resembles your Instagram feed and displays your posts as clickable images. This makes it easy to build a clickable, shoppable feed that links your audience straight to your content.
 For more, visit https://later.com/linkinbio
 
